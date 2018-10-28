@@ -1,0 +1,39 @@
+<h1>Welcome to Restaurant</h1>
+
+<table border="1">
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Created-till-now</th>
+    <th>Predicted</th>
+    <th>Status</th>
+
+    <tr *ngFor="let data of arrAllOrders">
+        <td>{{data.Name}}</td>
+        <td>{{data.Quantity}}</td>
+        <td>{{data.CTN}}</td>
+        <td>{{data.Predicted}}</td>
+        <td>{{data.Status}}<button *ngIf="data.Status!='Done'" (click)="onClickDone(data)">Done</button></td>
+
+    </tr>
+</table>
+
+<button  mat-raised-button color="primary" (click)="exportToCSV()">Export to CSV</button> <br>
+<hr>
+
+
+<h2>Order Entry</h2>
+<mat-form-field>
+    <mat-select placeholder="Select Dish" name="dish" [(ngModel)]="selectedDish" >
+      <mat-option *ngFor="let dish of arrDish" [value]="dish">
+        {{dish.Name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <label>Quantity</label>
+  
+  <mat-form-field>
+    <input matInput type="number" [(ngModel)]="qty" >
+  </mat-form-field>
+
+  <button  (click)="placeOrder()">Place</button>
